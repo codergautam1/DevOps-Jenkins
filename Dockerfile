@@ -1,7 +1,12 @@
 FROM python:3.11-slim
 WORKDIR /app
 
-COPY . .
-EXPOSE 8080
+COPY requirement.txt .
+RUN pip install --no-cache-dir -r requirement.txt
 
-CMD ["python","app.py"]
+COPY . .
+
+ENV PORT=5000
+EXPOSE 5000
+
+CMD ["python", "app.py"]
