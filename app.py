@@ -10,7 +10,7 @@ next_id = 1
 
 @app.route('/')
 def home():
-    return jsonify({"message": "User Service is running. Try /api/users"})
+    return jsonify({"message": "User Service is running on Docker"})
 
 @app.route('/health')
 def health():
