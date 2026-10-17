@@ -10,7 +10,7 @@ next_id = 1
 
 @app.route('/')
 def home():
-    return jsonify({"message": "User Service is running on Docker by Jenkins"})
+    return jsonify({"message": "User Service is running on Docker by Jenkins DevOps Pipelines"})
 
 @app.route('/health')
 def health():
