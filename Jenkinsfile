@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    tools { nodejs 'node-20' }
     stages {
         stage("code") {
             steps {
