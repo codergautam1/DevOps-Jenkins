@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+    tools { nodejs 'node-20' }
     stages {
         stage("code") {
             steps {
@@ -36,4 +36,33 @@ pipeline {
             }
         }
     }
+     post {
+        success {
+            emailext(
+                to: "codergautam1@gmail.com",
+                recipientProviders: [developers(), requestor()],
+                subject: "SUCCESS: Build Succeeded",
+                mimeType: 'text/html',
+                body: """
+                    <h3 style="color:#2e7d32;">Build succeeded</h3>
+                    <p>Build Succeeded with duration: ${currentBuild.durationString}</p>
+                """
+            )
+        }
+        failure {
+            emailext(
+                to: "codergautam1@gmail.com",
+                recipientProviders: [developers(), requestor(), culprits()],
+                subject: "FAILED: Build Failed",
+                mimeType: 'text/html',
+                attachLog: true,
+                compressLog: true,
+                body: """
+                    <h3 style="color:#c62828;">Build failed</h3>
+                    <b>Duration:</b> ${currentBuild.durationString}</p>
+                    <p>console">Open console output</p>
+                    <p>The build log is attached.</p>
+                """
+            )
+        }
 }
