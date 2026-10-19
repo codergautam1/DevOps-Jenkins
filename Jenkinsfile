@@ -8,7 +8,7 @@ pipeline {
         }
         stage("build") {
             steps{
-                sh "doc build -t my_app ."
+                sh "docker build -t my_app ."
             }
         }
         stage("docker hub"){
